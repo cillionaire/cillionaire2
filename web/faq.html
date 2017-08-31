@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<!-- Required meta tags -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+		<title>Cillionaire - FAQ</title>
+		
+		<link rel="stylesheet" href="vendor/bootstrap-4.0.0-beta-dist/css/bootstrap.min.css">
+		<link rel="stylesheet" href="cillionaire.css">
+		
+	</head>
+	<body>
+		<div class="container">
+			
+			<div>
+				<div class="row">
+					<div class="col-sm">
+						<h3 id="contents" class="margin-top margin-bottom">Cillionaire - Frequently Asked Questions</h3>
+					</div>
+				</div>
+				<div class="row margin-bottom-half">
+					<div class="col-sm">
+						<a href="#q1">Is this a scam?</a>
+						<br><a href="#q2">How does it work?</a>
+						<br><a href="#q3">Is this a lottery?</a>
+						<br><a href="#q4">How is the random selection of the beneficiary guaranteed?</a>
+						<br><a href="#q5">Why is there a fee?</a>
+						<br><a href="#q6">What about security?</a>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm margin-top-half">
+						Your question is not listed here? Contact us on Reddit: <a href="https://www.reddit.com/user/cillionaire/">/u/cillionaire</a>
+					</div>
+				</div>
+			</div>
+			
+			<div class="margin-top-double">
+				<div class="row">
+					<div class="col-sm">
+						<h5 id="q1">Is this a scam?</h5>
+						<p>No.</p>
+						<p>Cillionaire is backed by an <a href="https://en.wikipedia.org/wiki/Ethereum#Smart_contracts" target="_blank">Ethereum smart contract</a> which handles the ETH transfers and enforces the rules. The source code is freely available on <a href="https://github.com/cillionaire/cillionaire2" target="_blank">GitHub</a>. The smart contract's address is <a href="https://etherscan.io/address/0xdaff1f98299b12d475b4725a2635e5ba291aa651" target="_blank">0xdaff1f98299b12d475b4725a2635e5ba291aa651</a>.</p>
+						<p>The bottom line is that the game cannot be rigged.</p>
+					</div> 
+				</div>
+				<div class="row">
+					<div class="col-sm">
+						<a href="#contents">Top</a>
+					</div>
+				</div>
+			</div>
+			
+			<div class="margin-top-double">
+				<div class="row">
+					<div class="col-sm">
+						<h5 id="q2">How does it work?</h5>
+						<p>For each round of the game, a random beneficiary is selected from the previous round's donors.</p>
+						<p>So, by donating to the current beneficiary, every donor gets the chance to become the next round's beneficiary.</p>
+						<p>All donors contribute the same amount of ether that is transferred immediately to the beneficiary (minus a small fee).</p>
+						<p>Once the current round ends, the next round is started automatically.</p>
+						<p>You can look at current round's details on the <a href="index.html">main page</a>.</p>
+					</div> 
+				</div>
+				<div class="row">
+					<div class="col-sm">
+						<a href="#contents">Top</a>
+					</div>
+				</div>
+			</div>
+			
+				<div class="margin-top-double">
+					<div class="row">
+						<div class="col-sm">
+							<h5 id="q3">Is this a lottery?</h5>
+							<p>No.</p>
+							<p>There is no money pool because all donations (minus fee) are transferred immediately to the beneficiary. Furthermore, there is no "winner" in the same sense as in a lottery, because the beneficiary is chosen at the start of each round. So by the time the first donation is made, the beneficiary is final and public knowledge. In other words, donors know exactly who (more precisely: which Ethereum address) will receive their money; there's no luck involved. </p>
+						</div> 
+					</div>
+					<div class="row">
+						<div class="col-sm">
+							<a href="#contents">Top</a>
+						</div>
+					</div>
+				</div>
+			
+			<div class="margin-top-double">
+				<div class="row">
+					<div class="col-sm">
+						<h5 id="q4">How is the random selection of the beneficiary guaranteed?</h5>
+						<p>The Ethereum blockchain is deterministic, i.e. nothing on the chain is truly random. So, to achieve true randomness, the random number must be generated off-chain.</p>
+						<p>Cillionaire uses an commercial off-chain random number generator that is provided by <a href="http://www.oraclize.it/" target="_blank">Oraclize LTD</a>. Read up on the technical details of this solution in <a href="https://blog.oraclize.it/the-random-datasource-chapter-2-779946e54f49" target="_blank">this blog post</a>.</p>
+						<p>The bottom line is that neither the owner of the smart contract, nor the miner, nor anybody else can influence the selection of the next round's beneficiary. Any single donation has the same chance at being selected. Note that donating more than once increases the chance of winning.</p>
+					</div> 
+				</div>
+				<div class="row">
+					<div class="col-sm">
+						<a href="#contents">Top</a>
+					</div>
+				</div>
+			</div>
+			
+			<div class="margin-top-double">
+				<div class="row">
+					<div class="col-sm">
+						<h5 id="q5">Why is there a fee?</h5>
+						<p>The service that is used to generate the random numbers which is used to select the next round's beneficiary charges money.</p>
+						<p>The fee is primarily needed to cover those costs and keep the game running. Once the current round ends, the next round is started automatically.</p>
+						<p>The smart contract enforces that the fee can not be more than 10% of the donation (but it can be less). This is to ensure that the bulk of the money will go to the beneficiary.</p>
+					</div> 
+				</div>
+				<div class="row">
+					<div class="col-sm">
+						<a href="#contents">Top</a>
+					</div>
+				</div>
+			</div>
+			
+			<div class="margin-top-double">
+				<div class="row">
+					<div class="col-sm">
+						<h5 id="q6">What about security?</h5>
+						<p>This website is a front end for the smart contract, but does not contain any game logic. The smart contract handles the ETH transfers and cannot be compromised.</p>
+						<p>The only way the website could be compromised is if the donation transaction were to be hijacked such that donors' ETH would be sent to the hacker's address instead of the smart contract. The correct address is <b><a href="https://etherscan.io/address/0xdaff1f98299b12d475b4725a2635e5ba291aa651" target="_blank">0xdaff1f98299b12d475b4725a2635e5ba291aa651</a></b>. It is therefore important to check the recipient address before submitting the transaction in MyEtherWallet. It is also important to check that the transaction is indeed sent through myetherwallet.com. Please check the browser address bar to be sure.</p>
+					</div> 
+				</div>
+				<div class="row">
+					<div class="col-sm">
+						<a href="#contents">Top</a>
+					</div>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-sm margin-bottom margin-top-double smaller">
+					&copy; 2017 <a href="https://www.reddit.com/user/cillionaire/">/u/cillionaire</a>
+				</div>
+			</div>
+			
+		</div>
+	</body>
+</html>

@@ -1,0 +1,47 @@
+label {
+	font-variant: petite-caps;
+	font-weight: 400;
+}
+
+body {
+	font-weight: 300;
+	font-family: Roboto, Helvetica;
+	background-color: #fcffff;
+}
+
+.smaller {
+	font-size: smaller;
+}
+
+.align-with-button {
+	padding-top: 5px;
+}
+
+.margin-top {
+	margin-top: 1em;
+}
+
+.margin-top-half {
+	margin-top: 0.5em;
+}
+
+.margin-top-double {
+	margin-top: 2em;
+}
+
+.margin-bottom {
+	margin-bottom: 1em;
+}
+
+.margin-bottom-half {
+	margin-bottom: 0.5em;
+}
+
+.margin-bottom-double {
+	margin-bottom: 2em;
+}
+
+.float-left {
+	float:left;
+	margin-right: 1rem;
+}

@@ -71,7 +71,7 @@ contract Cillionaire is owned, usingOraclize {
         state = State.ENDED;
         oraclizeCallbackGas = 400000;
         nextRoundMaxDonors = 1000;
-    	nextRoundDuration = 1800; // seconds
+    	nextRoundDuration = 600; // seconds
     	nextRoundDonation = 0.01 ether;
     	nextRoundFee = 0.001 ether;
     	startRound(owner);
@@ -120,7 +120,7 @@ contract Cillionaire is owned, usingOraclize {
     }
     
     function deposit() external payable onlyOwner {
-        // allow to deposit ehter in case we run out of money for the Oraclize calls.
+        // allow to deposit ether in case we run out of money for the Oraclize calls.
     }
     
     function withdraw() external onlyOwner {
@@ -153,5 +153,9 @@ contract Cillionaire is owned, usingOraclize {
         require(_oraclizeCallbackGas > 200000); // prevent owner from starving Oraclize
         oraclizeCallbackGas = _oraclizeCallbackGas;
     }
+
+	function setOraclizeCallbackGasPrice(uint _oraclizeCallbackGasPrice) external onlyOwner {
+		oraclize_setCustomGasPrice(_oraclizeCallbackGasPrice); // default is 20 Gwei, i.e. 20000000000 wei
+	}
 
 }

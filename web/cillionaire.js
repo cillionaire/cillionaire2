@@ -9,13 +9,25 @@ var web3 = null;
 var cillionaire = null;
 
 $(function () {
-	setNetwork(MAIN_MYETHERAPI);
+	setNetwork(MAIN_INFURA);
 	bindUi();
 	updatePeriodically();
 });
 
 function bindUi() {
+	$("#network").change(onChangeNetwork);
 	$("#btnDonate").click(onClickDonate);
+}
+
+function onChangeNetwork() {
+	var n = $("#network").val();
+	if (n=="Mainnet (MyEtherApi)") {
+		setNetwork(MAIN_MYETHERAPI);
+	} else if (n=="Mainnet (Infura)") {
+		setNetwork(MAIN_INFURA);
+	} else if (n=="Kovan Testnet (Infura)"){
+		setNetwork(KOVAN);
+	}
 }
 
 async function updatePeriodically() {

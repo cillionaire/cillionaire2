@@ -25,9 +25,10 @@
 						<a href="#q1">Is this a scam?</a>
 						<br><a href="#q2">How does it work?</a>
 						<br><a href="#q3">Is this a lottery?</a>
-						<br><a href="#q4">How is the random selection of the beneficiary guaranteed?</a>
-						<br><a href="#q5">Why is there a fee?</a>
-						<br><a href="#q6">What about security?</a>
+						<br><a href="#q3">Is this legal?</a>
+						<br><a href="#q5">How is the random selection of the beneficiary guaranteed?</a>
+						<br><a href="#q6">Why is there a fee?</a>
+						<br><a href="#q7">What about security?</a>
 					</div>
 				</div>
 				<div class="row">
@@ -76,7 +77,7 @@
 						<div class="col-sm">
 							<h5 id="q3">Is this a lottery?</h5>
 							<p>No.</p>
-							<p>There is no money pool because all donations (minus fee) are transferred immediately to the beneficiary. Furthermore, there is no "winner" in the same sense as in a lottery, because the beneficiary is chosen at the start of each round. So by the time the first donation is made, the beneficiary is final and public knowledge. In other words, donors know exactly who (more precisely: which Ethereum address) will receive their money; there's no luck involved. </p>
+							<p>There is no money pool because all donations (minus fee) are transferred immediately to the beneficiary. Furthermore, there is no "winner" in the same sense as in a lottery, because the beneficiary is chosen at the start of each round. So by the time the first donation is made, the beneficiary is final and public knowledge. In other words, donors know exactly who (more precisely: which Ethereum address) will receive their money; There's no element of chance involved in the donations.</p>
 						</div> 
 					</div>
 					<div class="row">
@@ -86,10 +87,26 @@
 					</div>
 				</div>
 			
+				<div class="margin-top-double">
+					<div class="row">
+						<div class="col-sm">
+							<h5 id="q3">Is this legal?</h5>
+							<p>What is legal depends on each donor's jurisdiction, so there is no easy way to answer this question.</p>
+							<p>The smart contract itself (which works without this website) lives on the Ethereum blockchain. So, in a way it is everywhere and nowhere; it depends on the location of the miner that creates the respective blocks that contain Cillionaire transactions. Which country's laws apply in this case? To be honest: we're not lawyers - we don't know.</p>
+						</div> 
+					</div>
+					<div class="row">
+						<div class="col-sm">
+							<a href="#contents">Top</a>
+						</div>
+					</div>
+				</div>
+
+			
 			<div class="margin-top-double">
 				<div class="row">
 					<div class="col-sm">
-						<h5 id="q4">How is the random selection of the beneficiary guaranteed?</h5>
+						<h5 id="q5">How is the random selection of the beneficiary guaranteed?</h5>
 						<p>The Ethereum blockchain is deterministic, i.e. nothing on the chain is truly random. So, to achieve true randomness, the random number must be generated off-chain.</p>
 						<p>Cillionaire uses an commercial off-chain random number generator that is provided by <a href="http://www.oraclize.it/" target="_blank">Oraclize LTD</a>. Read up on the technical details of this solution in <a href="https://blog.oraclize.it/the-random-datasource-chapter-2-779946e54f49" target="_blank">this blog post</a>.</p>
 						<p>The bottom line is that neither the owner of the smart contract, nor the miner, nor anybody else can influence the selection of the next round's beneficiary.</p>
@@ -105,7 +122,7 @@
 			<div class="margin-top-double">
 				<div class="row">
 					<div class="col-sm">
-						<h5 id="q5">Why is there a fee?</h5>
+						<h5 id="q6">Why is there a fee?</h5>
 						<p>The service that is used to generate the random number for determining the next round's beneficiary charges money.</p>
 						<p>The fee is primarily needed to cover those costs and keep the game running. Once the current round ends, the next round is started automatically.</p>
 						<p>The smart contract enforces that the fee can not be more than 10% of the donation (but it can be less). This is to ensure that the bulk of the money will go to the beneficiary.</p>
@@ -121,7 +138,7 @@
 			<div class="margin-top-double">
 				<div class="row">
 					<div class="col-sm">
-						<h5 id="q6">What about security?</h5>
+						<h5 id="q7">What about security?</h5>
 						<p>This website is a front end for the smart contract, but does not contain any game logic. The smart contract handles the ETH transfers and cannot be compromised.</p>
 						<p>The only way the website could be compromised is if the donation transaction were to be hijacked such that donors' ETH would be sent to the hacker's address instead of the smart contract. The correct address is <b><a href="https://etherscan.io/address/0xdaff1f98299b12d475b4725a2635e5ba291aa651" target="_blank">0xdaff1f98299b12d475b4725a2635e5ba291aa651</a></b>. It is therefore important to check the recipient address before submitting the transaction in MyEtherWallet. It is also important to check that the transaction is indeed sent through myetherwallet.com. Please check the browser address bar to be sure.</p>
 					</div> 

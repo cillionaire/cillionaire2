@@ -59,9 +59,9 @@
 						<h5 id="q2">How does it work?</h5>
 						<p>For each round of the game, a random beneficiary is selected from the previous round's donors.</p>
 						<p>So, by donating to the current beneficiary, every donor gets the chance to become the next round's beneficiary.</p>
-						<p>All donors contribute the same amount of ether that is transferred immediately to the beneficiary (minus a small fee).</p>
+						<p>All donors contribute the same amount of ETH that is transferred immediately to the beneficiary (minus a small fee).</p>
 						<p>Once the current round ends, the next round is started automatically.</p>
-						<p>You can look at current round's details on the <a href="index.html">main page</a>.</p>
+						<p>You can look at current round's details on the main page.</p>
 					</div> 
 				</div>
 				<div class="row">
@@ -92,7 +92,7 @@
 						<h5 id="q4">How is the random selection of the beneficiary guaranteed?</h5>
 						<p>The Ethereum blockchain is deterministic, i.e. nothing on the chain is truly random. So, to achieve true randomness, the random number must be generated off-chain.</p>
 						<p>Cillionaire uses an commercial off-chain random number generator that is provided by <a href="http://www.oraclize.it/" target="_blank">Oraclize LTD</a>. Read up on the technical details of this solution in <a href="https://blog.oraclize.it/the-random-datasource-chapter-2-779946e54f49" target="_blank">this blog post</a>.</p>
-						<p>The bottom line is that neither the owner of the smart contract, nor the miner, nor anybody else can influence the selection of the next round's beneficiary. Any single donation has the same chance at being selected. Note that donating more than once increases the chance of winning.</p>
+						<p>The bottom line is that neither the owner of the smart contract, nor the miner, nor anybody else can influence the selection of the next round's beneficiary.</p>
 					</div> 
 				</div>
 				<div class="row">
@@ -106,7 +106,7 @@
 				<div class="row">
 					<div class="col-sm">
 						<h5 id="q5">Why is there a fee?</h5>
-						<p>The service that is used to generate the random numbers which is used to select the next round's beneficiary charges money.</p>
+						<p>The service that is used to generate the random number for determining the next round's beneficiary charges money.</p>
 						<p>The fee is primarily needed to cover those costs and keep the game running. Once the current round ends, the next round is started automatically.</p>
 						<p>The smart contract enforces that the fee can not be more than 10% of the donation (but it can be less). This is to ensure that the bulk of the money will go to the beneficiary.</p>
 					</div> 

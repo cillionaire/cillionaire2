@@ -19,7 +19,7 @@ function bindUi() {
 }
 
 async function updatePeriodically() {
-	await sleep(60000);
+	await sleep(60000 * 5);
 	update();
 	updatePeriodically();
 }

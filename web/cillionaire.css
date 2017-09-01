@@ -45,3 +45,14 @@ body {
 	float:left;
 	margin-right: 1rem;
 }
+
+.box {
+	border: 1px solid #afafbf;
+	border-radius: 3px;
+	background-color: white;
+	padding: 1rem;
+}
+
+.white {
+	background-color:white;
+}

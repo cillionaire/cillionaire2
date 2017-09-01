@@ -19,100 +19,105 @@
 	<body>
     <div class="container">
 			
-			<div class="row">
-				<div class="col-sm">
-					<h3 class="margin-top margin-bottom">Cillionaire - Let's Make a Crypto-Millionaire</h3>
+			<div class="row margin-top-double">
+				<div class="col-sm-8">
+					
+					<h3 class="margin-bottom">Cillionaire - Let's Make a Crypto-Millionaire</h3>
 					<p>What if thousands of people gave 0.01 ETH each to one person? That's Cillionaire in a nutshell.</p>
 					<p>Each round, a randomly selected beneficiary receives donations (minus a small fee). Anybody can donate. All donors are eligible to be selected as the beneficiary for the next round so...</p>
-					<p><b>The next crypto-millionaire could be you!</b>&nbsp;&nbsp;See our <a href="faq.html" target="_blank">Frequently Asked Questions</a> for the details.</p>
-				</div>
-			</div>
-			
-			<div class="margin-bottom-double">
-				<div class="row">
-					<div class="col-sm">
-						<h5 class="margin-top margin-bottom-half">Current Round</h5>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-sm-3">
-				  	<label for="network" class="margin-top">Select Network</label>
-					</div>
-					<div class="col-sm-3">
-				  	<select class="form-control margin-top-half" id="network">
-				    	<option>Mainnet (Infura)</option>
-							<option>Mainnet (MyEtherApi)</option>
-							<!--
-							<option>Kovan Testnet (Infura)</option>
-							-->
-				  	</select>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-sm">
-						<div class="alert alert-danger" style="display:none;" id="contractError"></div>
-					</div>
-				</div>
-				<div>
-					<div class="row">
-						<label for="contractBeneficiary" class="col-sm-3">Beneficiary:</label>
-						<div class="col-sm value" id="contractBeneficiary">Loading...</div>
-					</div>
-					<div class="row">
-						<label for="contractDonationSum" class="col-sm-3">Amount donated:</label>
-						<div class="col-sm value" id="contractDonationSum">Loading...</div>
-					</div>
-					<div class="row">
-						<label for="contractStartTimestamp" class="col-sm-3">Round started:</label>
-						<div class="col-sm value" id="contractStartTimestamp">Loading...</div>
-					</div>
-					<div class="row">
-						<div class="col-sm smaller">
-							Round info updates automatically every 5 minutes. 
-							<br>The next round will start after the first donation that happens after <span id="contractEndTimestamp">(Loading...)</span>. That donation will still go to the current benficiary.
+					<p>
+						<b>The next crypto-millionaire could be you!</b>
+						<br>See our <a href="faq.html" target="_blank">Frequently Asked Questions</a> for the details.
+					</p>
+					
+					<!--
+					<div class="row margin-bottom">
+						<div class="col-sm-3">
+					  	<label for="network" class="margin-top">Network</label>
+						</div>
+						<div class="col-sm">
+					  	<select class="form-control margin-top-half" id="network">
+					    	<option>Mainnet (Infura)</option>
+								<option>Mainnet (MyEtherApi)</option>
+								<option>Kovan Testnet (Infura)</option>
+					  	</select>
 						</div>
 					</div>
-				</div>
-			</div>
-			
-			<div id="divActions" style="display:none">
-				<div class="row">
-					<div class="col-sm">
-						<div class="alert alert-danger margin-top-half alert-dismissible" style="display:none;" id="actionsError" role="alert">
-							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-							    <span aria-hidden="true">&times;</span>
-							</button>
-							<span id="actionsErrorText"></span>
+					-->
+					
+					<div class="row">
+						<div class="col-sm">
+							<div class="alert alert-danger" style="display:none;" id="contractError"></div>
 						</div>
 					</div>
-				</div>
-				<div class="row">
-					<div class="col-sm">
-						<button id="btnDonate" class="btn btn-primary margin-top-half margin-bottom-half float-left">Donate</button>
-						<div class="smaller align-with-button">
-							Of your donation, <span id="donation">...</span> will immediately go to the beneficiary and <span id="fee">...</span> will be retained as fee. See <a href="https://etherscan.io/tx/0x4d903aab4e5501592cfd03b84fa4382574364af22ca1b1c542a909c9c6abe3a1" target="_blank">example transaction</a>.
+					
+					<div class="box">
+						<h4>Current Round</h4>
+						<div class="row">
+							<label for="contractBeneficiary" class="col-sm-3">Beneficiary:</label>
+							<div class="col-sm value" id="contractBeneficiary">Loading...</div>
+						</div>
+						<div class="row">
+							<label for="contractDonationSum" class="col-sm-3">Donated:</label>
+							<div class="col-sm value" id="contractDonationSum">Loading...</div>
+						</div>
+						<div class="row">
+							<div class="col-sm smaller">
+								Round info updates automatically every 5 minutes. This round was started <span id="contractStartTimestamp">(Loading...)</span>. The next round will start after the first donation that happens after <span id="contractEndTimestamp">(Loading...)</span>. That donation will still go to the current benficiary.
+							</div>
 						</div>
 					</div>
-				</div>
-				<div class="row margin-top">
-					<div class="col-sm">
-						<p>The "Donate" button generates a transaction that will be opened on MyEtherWallet.com in a new tab/window. There, you can send it using your preferred method of wallet access. If your browser blocks popups the generated URL will be displayed so you can navigate there manually.</p>
-						<p><b>ATTENTION:
-							<br>Please make sure that the "Donate" button sends you to myetherwallet.com by checking the browser's address bar. 
-							<br>Also, please double check that the recipient address is that of the smart contract: <a href="https://etherscan.io/address/0x02b97cca6d6a5227e464b2a60ee1a580ea4f7da9" target="_blank">0x02b97cca6d6a5227e464b2a60ee1a580ea4f7da9</a></b></p>
+					
+					<div id="divActions" class="margin-top" style="display:none">
+						<div class="row">
+							<div class="col-sm">
+								<div class="alert alert-danger margin-top-half alert-dismissible" style="display:none;" id="actionsError" role="alert">
+									<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+									    <span aria-hidden="true">&times;</span>
+									</button>
+									<span id="actionsErrorText"></span>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm">
+								<button id="btnDonate" class="btn btn-primary margin-top-half margin-bottom-half float-left">Donate</button>
+								<div class="smaller align-with-button">
+									Of your donation, <span id="donation">...</span> will immediately go to the beneficiary and <span id="fee">...</span> will be retained as fee. See <a href="https://etherscan.io/tx/0x4d903aab4e5501592cfd03b84fa4382574364af22ca1b1c542a909c9c6abe3a1" target="_blank">example transaction</a>.
+								</div>
+							</div>
+						</div>
+						<div class="row margin-top">
+							<div class="col-sm smaller">
+								<p>The "Donate" button generates a transaction that will be opened on MyEtherWallet.com in a new tab/window. There, you can send it using your preferred method of wallet access. If your browser blocks popups the generated URL will be displayed so you can navigate there manually.</p>
+								<p><b>ATTENTION:
+									<br>Please make sure that the "Donate" button sends you to myetherwallet.com by checking the browser's address bar. 
+									<br>Also, please double check that the recipient address is that of the smart contract: <a href="https://etherscan.io/address/0x02b97cca6d6a5227e464b2a60ee1a580ea4f7da9" target="_blank">0x02b97cca6d6a5227e464b2a60ee1a580ea4f7da9</a></b></p>
+							</div>
+						</div>
 					</div>
-				</div>
-			</div>
-			
-			<div id="divRoundComplete" style="display:none">
-				<div class="row">
-					<div class="col-sm">
-						<p>The current round has ended. The next round - featuring a new beneficiary - will be started shortly, so be sure to check back in a few minutes.</p>
+
+					<div id="divRoundComplete"style="display:none">
+						<div class="row">
+							<div class="col-sm">
+								<p>The current round has ended. The next round - featuring a new beneficiary - will be started shortly, so be sure to check back in a few minutes.</p>
+							</div>
+						</div>
 					</div>
+					
 				</div>
-			</div>
 			
-			<div class="row">
+				<div class="col-sm-3 offset-sm-1 box">
+					<a class="twitter-follow-button" href="https://twitter.com/TheCillionaire" data-size="large">Follow @TheCillionaire</a>
+					<br>
+					<a class="twitter-timeline" href="https://twitter.com/TheCillionaire">Tweets by @TheCillionaire</a>
+					
+					<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+				</div>
+				
+			</div> 
+			
+			<div class="row margin-top">
 				<div class="col-sm margin-bottom margin-top smaller">
 					&copy; 2017 <a href="https://www.reddit.com/user/cillionaire/">/u/cillionaire</a>
 				</div>

@@ -38,7 +38,7 @@ contract Cillionaire is mortal, usingOraclize {
     enum State { ENDED, DONATE }
     uint public constant maxFeePercentage = 10;
     uint public constant retainBalance = 0.01 ether;
-    uint public constant oraclizeMinCallbackGas = 180000;
+    uint public constant oraclizeMinCallbackGas = 210000;
     uint public constant oraclizeMinCallbackGasPrice = 20000000000 wei; // 20 gwei
     
     // state vars for current round
@@ -80,12 +80,12 @@ contract Cillionaire is mortal, usingOraclize {
         oraclize_setProof(proofType_Ledger);
         state = State.ENDED;
         oraclizeCallbackGas = oraclizeMinCallbackGas;
-        setOraclizeCallbackGasPrice(25000000000 wei);
+        setOraclizeCallbackGasPrice(oraclizeMinCallbackGasPrice);
         nextRoundMaxDonors = 100000;
-        nextRoundDuration = 600 seconds;
+        nextRoundDuration = 2 days;
         nextRoundDonation = 0.01 ether;
-        nextRoundFee = 0.0005 ether;
-        startRound(owner);
+        nextRoundFee = 0.0003 ether;
+        startRound(0x632485f482cf86b098fd4e75f6b99f7a04d3ee71); // a donor from the old contract 0x02b97cca6d6a5227e464b2a60ee1a580ea4f7da9
     }
 
     function startRound(address _beneficiary) internal onlyState(State.ENDED) {

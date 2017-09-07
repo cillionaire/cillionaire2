@@ -56,3 +56,10 @@ body {
 .white {
 	background-color:white;
 }
+
+.logo {
+	width: 130px; 
+	height: 130px; 
+	float:left; 
+	margin-right: 1rem;
+}

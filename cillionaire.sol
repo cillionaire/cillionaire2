@@ -27,6 +27,7 @@ contract owned {
 }
  
 contract mortal is owned {
+    
     function kill() onlyOwner {
         selfdestruct(owner);
     }
@@ -37,7 +38,7 @@ contract Cillionaire is mortal, usingOraclize {
     enum State { ENDED, DONATE }
     uint public constant maxFeePercentage = 10;
     uint public constant retainBalance = 0.01 ether;
-	uint public constant oraclizeMinCallbackGas = 200000;
+    uint public constant oraclizeMinCallbackGas = 180000;
     uint public constant oraclizeMinCallbackGasPrice = 20000000000 wei; // 20 gwei
     
     // state vars for current round
@@ -51,7 +52,7 @@ contract Cillionaire is mortal, usingOraclize {
     uint public donation;
     uint public fee;
     uint public donationSum;
-	uint public numDonors;
+    uint public numDonors;
     
     // parameter vars that can be set by owner
     uint public nextRoundMaxDonors;
@@ -79,7 +80,7 @@ contract Cillionaire is mortal, usingOraclize {
         oraclize_setProof(proofType_Ledger);
         state = State.ENDED;
         oraclizeCallbackGas = oraclizeMinCallbackGas;
-		setOraclizeCallbackGasPrice(30000000000 wei);
+        setOraclizeCallbackGasPrice(25000000000 wei);
         nextRoundMaxDonors = 100000;
         nextRoundDuration = 600 seconds;
         nextRoundDonation = 0.01 ether;
@@ -114,19 +115,20 @@ contract Cillionaire is mortal, usingOraclize {
             endRoundAndStartNextRound();
         }
         // try sending money to beneficiary. If that doesn't work e.g. because the beneficiary is a malicous gas-draining contract, then end the round and give the money back to the donor.
+        require(this.balance >= amountAfterFee); // fail if there's not enough balance left. that would be the case if Oraclize cost would be taken from this donation.
         if (!beneficiary.send(amountAfterFee)) {
             if (state != State.ENDED) { // don't end round twice.
                 endRoundAndStartNextRound();
-			}
+            }
             msg.sender.send(msg.value); // refund everything. 
-		}
+        }
     }
 
     function endRoundAndStartNextRound() internal { 
         state = State.ENDED;
         RoundEnded(beneficiary, donationSum);
         bytes32 queryId = oraclize_newRandomDSQuery(0, 7, oraclizeCallbackGas);
-	}
+    }
 
     function __callback(bytes32 _queryId, string _result, bytes _proof) onlyOraclize onlyState(State.ENDED) oraclize_randomDS_proofVerify(_queryId, _result, _proof) {
         uint randomNumber = uint(sha3(_result)); // https://gitter.im/oraclize/ethereum-api?at=595b98d7329651f46e5105b7
@@ -140,7 +142,7 @@ contract Cillionaire is mortal, usingOraclize {
     // Fail-safe in case callback doesn't work the first time. In this case the owner can trigger random number generation again, thereby starting the next round. 
 	// It can be called in ENDED state or if it is time to end the round.
     function startNextRound() external payable onlyOwner onlyState(State.ENDED) {
-		endRoundAndStartNextRound();
+        endRoundAndStartNextRound();
     }
     
     function deposit() external payable onlyOwner {
@@ -179,8 +181,7 @@ contract Cillionaire is mortal, usingOraclize {
     }
 
     function setOraclizeCallbackGasPrice(uint _oraclizeCallbackGasPrice) public onlyOwner {
-		require(_oraclizeCallbackGasPrice >= oraclizeMinCallbackGasPrice); // prevent owner from starving Oraclize
+        require(_oraclizeCallbackGasPrice >= oraclizeMinCallbackGasPrice); // prevent owner from starving Oraclize
         oraclize_setCustomGasPrice(_oraclizeCallbackGasPrice); // default is 20 Gwei, i.e. 20000000000 wei
     }
-
 }

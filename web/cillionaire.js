@@ -120,6 +120,7 @@ function sleep(ms) {
 
 function launchMyEtherWalletTransaction(to, valueWei, data) {
 	$("#actionsError").css("display", "none");
+	setNetwork(network); // work around metamask injecting its own web3 which breaks the following line:
 	var gasLimit = Math.round(web3.eth.estimateGas({
 	    "to": to, 
 	    "data": data,

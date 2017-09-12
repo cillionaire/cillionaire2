@@ -90,9 +90,15 @@ function updateContractUI() {
 	$('#contractDonationSum').html(formatEth(cillionaire.donationSum()));
 	$('#contractStartTimestamp').html(formatTimestamp(cillionaire.startTimestamp()));
 	$('#contractEndTimestamp').html(formatTimestamp(cillionaire.endTimestamp()));
-	$("#btnDonate").text("> Donate "+formatEth(cillionaire.donation())+ " <");
-	$("#donation").text(formatEth(cillionaire.donation().minus(cillionaire.fee())));
+	var donation = cillionaire.donation();
+	$("#btnDonate").text("> Donate "+formatEth(donation)+ " <");
+	$("#donation").text(formatEth(donation.minus(cillionaire.fee())));
 	$('#fee').text(formatEth(cillionaire.fee()));
+	$("#manualAddress").html(etherscanLink(network.address));
+	$("#manualAmount").text(formatEthWithoutUnits(donation));
+	var data = cillionaire.donate.getData();
+	$("#manualGasLimit").text(getGasLimit(network.address, donation, data));
+	$("#manualData").text(data);
 	showActions(parseInt(cillionaire.state()));
 }
 
@@ -103,6 +109,10 @@ function showActions(state) {
 
 function formatEth(wei) {
 	return wei.dividedBy(1E18).toString() + ' ' + network.units;
+}
+
+function formatEthWithoutUnits(wei) {
+	return wei.dividedBy(1E18).toString();
 }
 
 function formatTimestamp(timestamp) {
@@ -121,11 +131,7 @@ function sleep(ms) {
 function launchMyEtherWalletTransaction(to, valueWei, data) {
 	$("#actionsError").css("display", "none");
 	setNetwork(network); // work around metamask injecting its own web3 which breaks the following line:
-	var gasLimit = Math.round(web3.eth.estimateGas({
-	    "to": to, 
-	    "data": data,
-		"value": valueWei
-	}) * 1.3); // Gas Estimation doesn't work (on Kovan at least), ran out of gas more than once. Set a higher limit than estimated to work around that.
+	var gasLimit = getGasLimit(to, valueWei, data);
 	var val = valueWei == 0 ? "0" : valueWei.dividedBy(1E18).toString();
 	var url = "https://www.myetherwallet.com/?to="+to+"&value="+val+"&data="+data+"&gaslimit="+gasLimit.toString()+"#send-transaction"
 	var win = window.open(url, '_blank');
@@ -135,4 +141,12 @@ function launchMyEtherWalletTransaction(to, valueWei, data) {
 		$("#actionsErrorText").html("Your browser blocks popups. Please visit MyEtherWallet through the following link:<br><a href='"+url+"' target='_blank'>"+url+"</a>");
 	    $("#actionsError").css("display", "block");
 	}
+}
+
+function getGasLimit(to, valueWei, data) {
+	return Math.round(web3.eth.estimateGas({
+	    "to": to, 
+	    "data": data,
+		"value": valueWei
+	}) * 1.1); // Gas Estimation doesn't work (on Kovan at least), ran out of gas more than once. Set a higher limit than estimated to work around that.
 }
